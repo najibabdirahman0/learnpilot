@@ -1,0 +1,64 @@
+my app/
+│
+├── index.html                    ← Root HTML file for Vite
+├── package.json                  ← Project metadata and dependencies
+├── tailwind.config.js           ← Tailwind color + theme config
+├── postcss.config.js            ← Required for Tailwind
+├── vite.config.js               ← Vite settings
+├── .gitignore                   ← Files to ignore in Git
+├── .env                         ← Environment variables (e.g. API keys)
+│
+├── PLANNING.md                  ← Full project scope
+├── TASK.md                      ← AI task file (daily/feature-wise)
+│
+├── public/                      ← Public files (e.g., logo, icons)
+│   ├── logo.png
+│   └── favicon.ico
+│
+├── src/                         ← Your application source code
+│   ├── main.jsx                 ← Entry file (root React mount)
+│   ├── App.jsx                  ← Main app layout
+│   │
+│   ├── components/              ← Reusable components (buttons, navbar, etc.)
+│   │   └── Navbar.jsx
+│   │   └── Footer.jsx
+│   │
+│   ├── pages/                   ← Page-level views
+│   │   └── Landing.jsx         ← Landing page
+│   │   └── Dashboard.jsx       ← User dashboard
+│   │   └── Interview.jsx       ← Mock Interview
+│   │   └── StudyBuddy.jsx
+│   │   └── Flashcards.jsx
+│   │   └── VideoMeeting.jsx
+│   │   └── Settings.jsx
+│   │
+│   ├── features/                ← Business logic (for each feature)
+│   │   └── mockInterview/
+│   │   └── studyBuddy/
+│   │   └── flashcards/
+│   │   └── meetings/
+│   │
+│   ├── locales/                 ← Language translations (i18n)
+│   │   └── en.json
+│   │   └── ar.json
+│   │   └── id.json
+│   │   └── ja.json
+│   │   └── my.json
+│   │   └── sw.json
+│   │   └── tl.json
+│   │   └── zh.json
+│   │
+│   ├── assets/                  ← Images, illustrations, etc.
+│   │   └── hero.jpg
+│   │   └── mockinterview.mp4
+│   │
+│   ├── styles/                  ← Global styles (if needed)
+│   │   └── global.css
+│   │
+│   ├── supabase/                ← Supabase client & helpers
+│   │   └── client.js
+│   │   └── dbFunctions.js
+│   │
+│   └── auth/                    ← Clerk or custom auth logic
+│       └── ClerkProvider.jsx
+│       └── useUser.js

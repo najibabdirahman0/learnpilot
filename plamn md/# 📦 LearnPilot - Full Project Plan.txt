@@ -1,0 +1,238 @@
+# 📦 LearnPilot - Full Project Planning Document
+
+## 🎯 Project Overview
+**Location:** `C:\Users\najib\OneDrive\Desktop\my app`
+
+LearnPilot is a comprehensive AI-powered learning and interview preparation platform that combines mock interviews, study assistance, flashcard systems, and video meeting capabilities with multilingual support.
+
+## 🏗️ Technical Stack
+- **Frontend:** React + Vite + TypeScript
+- **Styling:** Tailwind CSS (custom config)
+- **Authentication:** Clerk (with contact sync)
+- **Database:** Supabase (PostgreSQL)
+- **AI Services:** GPT-4, Whisper, TTS (Google/Azure)
+- **Video:** WebRTC
+- **Internationalization:** i18next
+- **Testing:** Vitest
+- **Deployment:** Netlify/Vercel
+
+## 🎨 Design System
+
+### Color Palette (Defined in tailwind.config.js)
+| Element | Color Code | Tailwind Class | Usage |
+|---------|-----------|----------------|--------|
+| Primary Background | #F4F5F7 | `bg-primary` | App background (light mode) |
+| Primary Accent | #2563EB | `text-accent`, `bg-accent` | Buttons, highlights, links |
+| Secondary Accent | #1E40AF | `text-secondary-accent` | Headers, outlines |
+| Light Border | #E5E7EB | `border-light` | Input borders, dividers |
+| Text Primary | #111827 | `text-primary` | Normal text |
+| Text Secondary | #6B7280 | `text-secondary` | Hints, labels, tooltips |
+| Success Green | #10B981 | `text-success`, `bg-success` | Completed steps, positive status |
+| Warning Yellow | #F59E0B | `text-warning`, `bg-warning` | Alerts, scheduled reminders |
+| Error Red | #EF4444 | `text-error`, `bg-error` | Errors, warnings |
+
+### Design Rules
+- No custom inline colors allowed
+- Use Tailwind config classes only
+- Same palette across all 8 languages
+- Logo and branding colors remain fixed
+
+## 🌐 Internationalization (i18n)
+
+### Supported Languages (8 Total)
+1. English (en)
+2. Arabic (ar)  
+3. Indonesian (id)
+4. Japanese (ja)
+5. Burmese (my)
+6. Swahili (sw)
+7. Tagalog (tl)
+8. Chinese Simplified (zh)
+
+### Implementation
+- Translation files: `/src/locales/{lang}.json`
+- Library: i18next
+- Dynamic switching affects entire app instantly
+- All AI responses follow selected language
+
+## 📁 Project Structure
+```
+C:\Users\najib\OneDrive\Desktop\my app/
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── ui/             # Base UI components
+│   │   ├── layout/         # Layout components
+│   │   └── features/       # Feature-specific components
+│   ├── pages/              # Route pages
+│   ├── features/           # Feature modules
+│   │   ├── mock-interview/
+│   │   ├── study-buddy/
+│   │   ├── flashcards/
+│   │   └── video-meeting/
+│   ├── locales/            # Translation JSON files
+│   ├── assets/             # Images, logo, static files
+│   ├── supabase/           # Database config and types
+│   ├── styles/             # Global styles
+│   ├── hooks/              # Custom React hooks
+│   ├── utils/              # Utility functions
+│   └── types/              # TypeScript type definitions
+├── public/                 # Static public assets
+├── .env                    # Environment variables
+├── PLANNING.md            # This file
+├── TASK.md                # Development task list
+├── tailwind.config.js     # Tailwind configuration
+├── vite.config.ts         # Vite configuration
+├── package.json           # Dependencies
+└── README.md              # Project documentation
+```
+
+## 🚀 Core Features
+
+### 1️⃣ Mock Interview System
+**User Flow:**
+1. Upload CV (PDF/DOC support)
+2. Select job role from predefined list
+3. Choose interview style (behavioral, technical, mixed)
+4. Select interviewer type (friendly, challenging, neutral)
+5. Choose language for interview
+6. Start AI interview (voice or text mode)
+7. Receive real-time feedback during interview
+8. Post-interview deliverables:
+   - Numerical score with breakdown
+   - Detailed improvement suggestions
+   - AI-generated updated CV
+   - Tailored cover letter draft
+
+**Technical Requirements:**
+- File upload handling
+- GPT-4 integration for interview questions
+- Whisper for voice input processing
+- TTS for AI interviewer voice
+- Real-time feedback system
+- Document generation (CV, cover letter)
+
+### 2️⃣ Study Buddy (Dual Mode)
+
+**AI Mode Flow:**
+1. Select AI persona (Lecturer, Student, Mentor)
+2. Input topic or upload study material
+3. Choose conversation language
+4. Engage in AI conversation (text/voice)
+5. Auto-save conversation summaries
+6. Export highlights to flashcards or calendar
+
+**Chat Mode Flow:**
+1. Access Study Buddy Chat interface
+2. Auto-sync contacts via Clerk
+3. Start conversations with friends
+4. Send messages, files, voice notes
+5. Initiate audio/video calls
+6. Plan and schedule group study sessions
+
+**Technical Requirements:**
+- Clerk contact synchronization
+- File upload and processing
+- GPT-4 conversation management
+- Real-time messaging system
+- Audio/video call integration
+- Session management and storage
+
+### 3️⃣ Flashcard Calendar System
+**User Flow:**
+1. Navigate to Flashcard Calendar view
+2. Create study session: Date, Time, Title
+3. Add optional session notes
+4. Receive pre-session notifications
+5. Post-session workflow:
+   - Add reflection notes
+   - Auto-convert session content to flashcards
+   - Schedule review sessions
+6. Integration with other features:
+   - Import from Study Buddy conversations
+   - Import from Video Meeting notes
+   - Import from Mock Interview feedback
+
+**Technical Requirements:**
+- Calendar interface with CRUD operations
+- Notification system
+- Flashcard generation algorithms
+- Spaced repetition scheduling
+- Cross-feature content integration
+
+### 4️⃣ Video Meeting Platform
+
+**Interview Mode Flow:**
+1. Host creates interview meeting room
+2. Send invitations to candidates
+3. Candidates join with name entry
+4. Alphabetical queue system with 2-minute intervals
+5. One-on-one interview sessions
+6. AI Co-pilot takes notes and suggests questions
+7. Auto-generated summary after each interview
+
+**Personal Mode Flow:**
+1. Create or join personal meeting room
+2. Camera/microphone controls
+3. Unlimited participant support
+4. Multi-language subtitle system
+5. AI Co-pilot for notes and Q&A assistance
+6. Complete meeting summary generation
+
+**Technical Requirements:**
+- WebRTC implementation
+- Queue management system
+- Real-time AI note-taking
+- Multi-language subtitle generation
+- Meeting recording and storage
+- AI-powered meeting summaries
+
+## 🔐 Authentication & Data Management
+- **Clerk Integration:** User authentication, profile management, contact sync
+- **Supabase Setup:** Database schema, real-time subscriptions, file storage
+- **Data Privacy:** GDPR compliance, data encryption, user consent management
+
+## 🧪 Testing Strategy
+- Unit tests for utility functions
+- Component testing with React Testing Library
+- Integration tests for API endpoints
+- E2E tests for critical user flows
+- Multi-language testing across all features
+
+## 🌐 Deployment Requirements
+- Environment variable management
+- Build optimization for multiple languages
+- CDN setup for global performance
+- Monitoring and error tracking
+- Automated CI/CD pipeline
+
+## 📊 Success Metrics
+- User engagement across all four features
+- Language preference distribution
+- Interview completion rates
+- Study session effectiveness
+- User retention and satisfaction
+
+## 🔗 Feature Integration Map
+```
+Mock Interview → Flashcards (feedback to cards)
+Study Buddy → Flashcards (conversation to cards)
+Video Meeting → Flashcards (notes to cards)
+Study Buddy Chat → Calendar (group sessions)
+All Features → Multi-language support
+All Features → Consistent design system
+```
+
+## 🚧 Development Phases
+1. **Setup & Foundation** (Week 1)
+2. **Core UI Components** (Week 2)
+3. **Authentication & i18n** (Week 3)
+4. **Mock Interview Feature** (Week 4-5)
+5. **Study Buddy Feature** (Week 6-7)
+6. **Flashcard System** (Week 8)
+7. **Video Meeting Platform** (Week 9-10)
+8. **Integration & Testing** (Week 11)
+9. **Deployment & Launch** (Week 12)
+
+---
+
+*This planning document serves as the single source of truth for the LearnPilot project development process.*
