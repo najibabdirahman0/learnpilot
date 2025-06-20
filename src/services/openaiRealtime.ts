@@ -65,7 +65,7 @@ export class OpenAIRealtimeService {
       console.log('🔗 Connecting to OpenAI Realtime API...');
       
       // OpenAI Realtime API WebSocket endpoint
-      const wsUrl = 'wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-10-01';
+      const wsUrl = import.meta.env.VITE_OPENAI_REALTIME_WS_URL || 'wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-10-01';
       
       this.ws = new WebSocket(wsUrl, [
         'realtime',
