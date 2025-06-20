@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import JobSetup from './JobSetup';
 import InterviewGuides from './InterviewGuides';
 import InterviewerSelect from './InterviewerSelect';
-import OpenAIRealtimeInterview from './OpenAIRealtimeInterview';
 import Feedback from './Feedback';
 import FileUpload from './FileUpload';
 import JobApplicationHistory from './JobApplicationHistory';
@@ -253,22 +252,33 @@ export default function MockInterview({ userName = 'there' }: MockInterviewProps
 
           {step === 'interviewer' && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              key="interviewer"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
             >
               <InterviewerSelect onSelect={handleInterviewerSelect} />
             </motion.div>
           )}
 
           {step === 'interview' && (
-            <OpenAIRealtimeInterview
-              jobData={jobData}
-              cvContent={cvContent}
-              interviewer={interviewer}
-              userName={userName}
-              onComplete={handleInterviewComplete}
-            />
+            <motion.div
+              key="interview"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+            >
+              <div className="text-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Interview In Progress</h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">This is where the real-time interview component will go.</p>
+                <button
+                  onClick={() => handleInterviewComplete(Math.floor(Math.random() * 31) + 70)}
+                  className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                >
+                  (Dev) Finish Interview
+                </button>
+              </div>
+            </motion.div>
           )}
 
           {step === 'feedback' && (
