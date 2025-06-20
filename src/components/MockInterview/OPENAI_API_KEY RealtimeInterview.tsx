@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { useWhisper } from "@chengsokdara/use-whisper";
 
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
 export default function VoiceAssistant() {
   const [aiFinishedSpeaking, setAiFinishedSpeaking] = useState(true);
@@ -47,13 +47,13 @@ export default function VoiceAssistant() {
   };
 
   useEffect(() => {
-    if (transcript?.toLowerCase().includes("hello") && !firstGreetingDone) {
+    if (transcript?.text?.toLowerCase().includes("hello") && !firstGreetingDone) {
       setFirstGreetingDone(true);
       append({ role: "user", content: "Hello" });
     }
 
-    if (firstGreetingDone && transcript && aiFinishedSpeaking) {
-      append({ role: "user", content: transcript });
+    if (firstGreetingDone && transcript?.text && aiFinishedSpeaking) {
+      append({ role: "user", content: transcript.text });
     }
   }, [transcript]);
 
@@ -61,7 +61,7 @@ export default function VoiceAssistant() {
     <div className="p-6">
       <h1 className="text-xl font-bold mb-4">🎙️ Speak Now – AI Is Listening</h1>
       <div className="bg-gray-100 p-3 rounded">
-        <strong>Live:</strong> {transcript || "Waiting..."}
+        <strong>Live:</strong> {transcript?.text || "Waiting..."}
       </div>
       <div className="mt-4">
         {messages.map((m) => (
